@@ -1,9 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
+import GeneratorPage from "../pages/GeneratorPage";
 
 export const Route = createLazyFileRoute("/generator")({
-  component: Generator,
+  component: GeneratorPage,
 });
-
-function Generator() {
-  return <div className="p-2">Hello from Generator!</div>;
-}

@@ -5,6 +5,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import "./index.css";
 
 import { routeTree } from "./routeTree.gen";
+import { CoverLetterProvider } from "./contexts/CoverLetterContext";
 
 const router = createRouter({ routeTree });
 
@@ -20,7 +21,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <CoverLetterProvider>
+        <RouterProvider router={router} />
+      </CoverLetterProvider>
     </StrictMode>,
   );
 }
