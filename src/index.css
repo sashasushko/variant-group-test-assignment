@@ -1,0 +1,111 @@
+@import 'normalize.css';
+
+@font-face {
+    font-family: 'Fixel Display';
+    src: url('/FixelDisplay-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fixel Text';
+    src: url('/FixelText-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fixel Text';
+    src: url('/FixelText-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fixel Text';
+    src: url('/FixelText-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+:root {
+    --color-white: #FFFFFF;
+    --color-black: #101828;
+
+    --color-brand: #087443;
+    --color-brand-dark: #065c34;
+    --color-brand-secondary: #EDFCF2;
+
+    --color-neutral-0: #F2F4F7;
+    --color-neutral-1: #EAECF0;
+    --color-neutral-2: #D0D5DD;
+    --color-neutral-3: #98A2B3;
+    --color-neutral-4: #667085;
+    --color-neutral-5: #475467;
+    --color-neutral-6: #344054;
+
+    --font-family-heading: 'Fixel Display', sans-serif;
+    --font-family: 'Fixel Text', sans-serif;
+
+    --text-heading: 36px;
+    --text-heading-height: 44px;
+    --text-heading-lg: 48px;
+    --text-heading-lg-height: 60px;
+
+    --text-sm: 14px;
+    --text-sm-height: 20px;
+    --text: 16px;
+    --text-height: 24px;
+    --text-lg: 18px;
+    --text-lg-height: 28px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: var(--text);
+    line-height: var(--text-height);
+    color: var(--color-black);
+    background-color: var(--color-white);
+}
+
+.container {
+    margin: 0 auto;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 120px;
+    max-width: 1200px;
+
+    @media screen and (min-width: 768px) {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+    
+    @media screen and (min-width: 1200px) {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
