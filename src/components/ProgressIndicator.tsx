@@ -1,21 +1,54 @@
-import React from "react";
+import React, { useMemo } from "react";
+import clsx from "clsx";
+import { useCoverLetterData } from "../contexts/CoverLetterContext";
+
+import styles from "./ProgressIndicator.module.css";
 
 interface ProgressIndicatorProps {
-  total: number;
-  current: number;
+  className?: string;
+  limit: number;
+  variant?: "vertical" | "horizontal";
 }
 
 const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
-  total,
-  current,
+  className,
+  limit,
+  variant = "horizontal",
 }) => {
-  return (
-    <div className="mt-4">
-      <p className="text-sm font-medium mb-2">
-        Cover Letters Created: {current}/{total}
-      </p>
-    </div>
-  );
+  const coverLetters = useCoverLetterData();
+
+  const current = Math.min(coverLetters.length, limit);
+
+  const indicator = useMemo(() => {
+    return Array.from({ length: limit }, (_, i) => (
+      <span
+        key={i}
+        className={clsx(
+          styles.indicatorItem,
+          i < current && styles.indicatorItemActive,
+        )}
+      ></span>
+    ));
+  }, [current, limit]);
+
+  switch (variant) {
+    case "horizontal":
+      return (
+        <div className={clsx(styles.element, styles.horizontal, className)}>
+          {current}/{limit} applications generated
+          <span className={styles.indicator}>{indicator}</span>
+        </div>
+      );
+    case "vertical":
+      return (
+        <div className={clsx(styles.element, styles.vertical, className)}>
+          <span className={styles.indicator}>{indicator}</span>
+          {current} out of {limit}
+        </div>
+      );
+    default:
+      return null;
+  }
 };
 
 export default ProgressIndicator;

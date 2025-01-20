@@ -1,0 +1,57 @@
+.element {
+    display: flex;
+
+    font-size: var(--text-lg);
+    line-height: var(--text-lg-height);
+    color: var(--color-neutral-4);
+
+    &.horizontal {
+        justify-content: flex-start;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &.vertical {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+.indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .horizontal & {
+        gap: 4px;
+    }
+
+    .vertical & {
+        gap: 8px;
+    }
+}
+
+.indicator-item {
+    opacity: 0.24;
+    background-color: var(--color-black);
+
+    .horizontal & {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    .vertical & {
+        width: 32px;
+        height: 8px;
+        border-radius: 4px;
+    }
+}
+
+.indicator-item-active {
+    opacity: 1;
+}
+
+.indicator {}
