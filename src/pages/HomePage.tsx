@@ -1,21 +1,26 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
-import { useCoverLetters } from "../contexts/CoverLetterContext";
+import Button from "../components/Button";
 import CoverLetterList from "../components/CoverLetterList";
-import ProgressIndicator from "../components/ProgressIndicator";
+
+import Plus from "../assets/plus.svg?react";
+
+import styles from "./HomePage.module.css";
 
 const HomePage: React.FC = () => {
-  const { coverLetters } = useCoverLetters();
-
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold">Cover Letters</h2>
-        <Link to="/generator">Create Cover Letter</Link>
+    <main>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Applications</h1>
+        <Link to="/generator">
+          <Button as="span" size="sm" icon={<Plus width={20} height={20} />}>
+            Create New
+          </Button>
+        </Link>
       </div>
+      <hr className={styles.separator} />
       <CoverLetterList />
-      <ProgressIndicator total={5} current={Math.min(coverLetters.length, 5)} />
-    </div>
+    </main>
   );
 };
 
