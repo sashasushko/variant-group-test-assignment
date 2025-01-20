@@ -1,28 +1,39 @@
 import React, { createContext, useContext, useState } from "react";
+import { nanoid } from "nanoid";
 
 interface CoverLetter {
   id: string;
-  jobTitle: string;
-  company: string;
-  skills: string;
-  additionalDetails: string;
+  content: string;
 }
 
-interface CoverLetterContextType {
-  coverLetters: CoverLetter[];
-  addCoverLetter: (coverLetter: Omit<CoverLetter, "id">) => void;
+interface CoverLetterActionsContextType {
+  addCoverLetter: (content: string) => void;
   deleteCoverLetter: (id: string) => void;
 }
 
-const CoverLetterContext = createContext<CoverLetterContextType | undefined>(
+const CoverLetterDataContext = createContext<CoverLetter[] | undefined>(
   undefined,
 );
 
-export const useCoverLetters = () => {
-  const context = useContext(CoverLetterContext);
+const CoverLetterActionsContext = createContext<
+  CoverLetterActionsContextType | undefined
+>(undefined);
+
+export const useCoverLetterData = () => {
+  const context = useContext(CoverLetterDataContext);
   if (!context) {
     throw new Error(
-      "useCoverLetters must be used within a CoverLetterProvider",
+      "useCoverLetterData must be used within a CoverLetterProvider",
+    );
+  }
+  return context;
+};
+
+export const useCoverLetterActions = () => {
+  const context = useContext(CoverLetterActionsContext);
+  if (!context) {
+    throw new Error(
+      "useCoverLetterActions must be used within a CoverLetterProvider",
     );
   }
   return context;
@@ -31,10 +42,23 @@ export const useCoverLetters = () => {
 export const CoverLetterProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [coverLetters, setCoverLetters] = useState<CoverLetter[]>([]);
+  const [coverLetters, setCoverLetters] = useState<CoverLetter[]>(() => {
+    const storedCoverLetters = localStorage.getItem("coverLetters");
+    return storedCoverLetters
+      ? (JSON.parse(storedCoverLetters) as CoverLetter[])
+      : [];
+  });
 
-  const addCoverLetter = (coverLetter: Omit<CoverLetter, "id">) => {
-    const newCoverLetter = { ...coverLetter, id: Date.now().toString() };
+  React.useEffect(() => {
+    localStorage.setItem("coverLetters", JSON.stringify(coverLetters));
+  }, [coverLetters]);
+
+  const addCoverLetter = (content: string) => {
+    const newCoverLetter: CoverLetter = {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+      id: nanoid(),
+      content,
+    };
     setCoverLetters((prev) => [...prev, newCoverLetter]);
   };
 
@@ -43,10 +67,12 @@ export const CoverLetterProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <CoverLetterContext.Provider
-      value={{ coverLetters, addCoverLetter, deleteCoverLetter }}
-    >
-      {children}
-    </CoverLetterContext.Provider>
+    <CoverLetterDataContext.Provider value={coverLetters}>
+      <CoverLetterActionsContext.Provider
+        value={{ addCoverLetter, deleteCoverLetter }}
+      >
+        {children}
+      </CoverLetterActionsContext.Provider>
+    </CoverLetterDataContext.Provider>
   );
 };
