@@ -1,0 +1,14 @@
+.container {
+    overflow-x: auto;
+    padding: 18px;
+    background-color: var(--color-neutral-0);
+    border-radius: 12px;
+    color: var(--color-neutral-4);
+    font-size: var(--text-lg);
+    line-height: var(--text-lg-height);
+    white-space: pre-line;
+
+    @media screen and (min-width: 640px) {
+        padding: 24px;
+    }
+}
