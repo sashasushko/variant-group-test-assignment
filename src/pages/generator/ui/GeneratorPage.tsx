@@ -1,16 +1,23 @@
-import React from "react";
-import { useNavigate } from "@tanstack/react-router";
+import React, { useState } from "react";
 import { useCoverLetterActions } from "@/entities/store";
-import { LetterGenerator } from "@/features/letter-generator";
+import { Form, Preview } from "@/features/letter-generator";
+
+import styles from "./GeneratorPage.module.css";
 
 export const GeneratorPage: React.FC = () => {
-  const navigate = useNavigate();
+  const [isPreview, setIsPreview] = useState(false);
+
   const { addCoverLetter } = useCoverLetterActions();
 
   const handleGenerate = (content: string) => {
     addCoverLetter(content);
-    void navigate({ to: "/" });
+    setIsPreview(true);
   };
 
-  return <LetterGenerator onGenerate={handleGenerate} />;
+  return (
+    <div className={styles.container}>
+      <Form onGenerate={handleGenerate} />
+      <Preview show={isPreview} />
+    </div>
+  );
 };

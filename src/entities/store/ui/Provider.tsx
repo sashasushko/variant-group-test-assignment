@@ -26,7 +26,7 @@ export const CoverLetterProvider: React.FC<{ children: React.ReactNode }> = ({
       id: nanoid(),
       content,
     };
-    setCoverLetters((prev) => [...prev, newCoverLetter]);
+    setCoverLetters((prev) => [newCoverLetter, ...prev]);
   }, []);
 
   const deleteCoverLetter = useCallback((id: string) => {

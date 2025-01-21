@@ -15,7 +15,7 @@ export const Progress: React.FC<ProgressProps> = ({ className, variant }) => {
     <Indicator
       className={className}
       current={coverLetters.length}
-      limit={GOAL_LIMIT}
+      goal={GOAL_LIMIT}
       variant={variant}
     />
   );

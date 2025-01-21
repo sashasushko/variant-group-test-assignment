@@ -8,6 +8,7 @@
 .title {
     margin: 0;
     font-weight: 600;
+    font-family: var(--font-family-heading);
     font-size: var(--text-heading-lg);
     line-height: var(--text-heading-lg-height);
     letter-spacing: -2%;

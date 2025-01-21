@@ -1,0 +1,9 @@
+.container {
+    padding: 24px;
+    background-color: var(--color-neutral-0);
+    border-radius: 12px;
+    color: var(--color-neutral-4);
+    font-size: var(--text-lg);
+    line-height: var(--text-lg-height);
+    white-space: pre-line;
+}
