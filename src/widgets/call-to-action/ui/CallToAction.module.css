@@ -1,8 +1,16 @@
 .container {
     margin-top: 48px;
-    padding: 54px 64px;
+    padding: 36px 24px;
     border-radius: 12px;
     background-color: var(--color-brand-secondary);
+
+    @media screen and (min-width: 480px) {
+        padding: 36px 48px;
+    }
+
+    @media screen and (min-width: 640px) {
+        padding: 54px 64px;
+    }
 }
 
 .panel {

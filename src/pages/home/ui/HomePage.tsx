@@ -13,7 +13,7 @@ export const HomePage: React.FC = () => {
         <h1 className={styles.title}>Applications</h1>
         <Link to="/generate">
           <Button as="span" size="sm" icon={<Plus width={20} height={20} />}>
-            Create New
+            Create<span className="hide-on-phone"> New</span>
           </Button>
         </Link>
       </div>

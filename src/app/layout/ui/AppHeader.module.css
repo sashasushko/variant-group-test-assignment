@@ -11,8 +11,22 @@
     margin-right: auto;
 }
 
-.home-icon {
+.logo-pic {
     display: inline-flex;
+
+    img {
+        width: 44px;
+        height: 44px;
+
+        @media screen and (min-width: 480px) {
+            width: 179px;
+            height: 48px;
+        }
+    }
+}
+
+.home-icon {
+    display: none;
     justify-content: center;
     align-items: center;
     width: 40px;
@@ -24,5 +38,9 @@
 
     &:hover {
         background-color: var(--color-neutral-0);
+    }
+
+    @media screen and (min-width: 640px) {
+        display: inline-flex;
     }
 }

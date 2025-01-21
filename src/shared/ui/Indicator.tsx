@@ -35,9 +35,12 @@ export const Indicator = ({
     case "horizontal":
       return (
         <div className={clsx(styles.element, styles.horizontal, className)}>
-          {current}/{goal} applications generated
+          <span className={styles.labelLong}>
+            {current}/{goal} <span className="hide-on-phone">applications </span>
+            generated
+          </span>
           {current >= goal ? (
-            <Success width={28} height={28} />
+            <Success className={styles.success} width={28} height={28} />
           ) : (
             <span className={styles.indicator}>{indicator}</span>
           )}

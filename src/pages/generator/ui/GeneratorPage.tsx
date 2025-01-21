@@ -17,7 +17,7 @@ export const GeneratorPage: React.FC = () => {
   return (
     <div className={styles.container}>
       <Form onGenerate={handleGenerate} />
-      <Preview show={isPreview} />
+      <Preview showPreview={isPreview} />
     </div>
   );
 };

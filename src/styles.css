@@ -47,10 +47,10 @@
     --font-family-heading: 'Fixel Display', sans-serif;
     --font-family: 'Fixel Text', sans-serif;
 
-    --text-heading: 36px;
-    --text-heading-height: 44px;
-    --text-heading-lg: 48px;
-    --text-heading-lg-height: 60px;
+    --text-heading: 28px;
+    --text-heading-height: 34px;
+    --text-heading-lg: 32px;
+    --text-heading-lg-height: 40px;
 
     --text-sm: 14px;
     --text-sm-height: 20px;
@@ -58,6 +58,20 @@
     --text-height: 24px;
     --text-lg: 18px;
     --text-lg-height: 28px;
+
+    @media screen and (min-width: 480px) {
+        --text-heading: 32px;
+        --text-heading-height: 38px;
+        --text-heading-lg: 40px;
+        --text-heading-lg-height: 52px;
+    }
+
+    @media screen and (min-width: 640px) {
+        --text-heading: 36px;
+        --text-heading-height: 44px;
+        --text-heading-lg: 48px;
+        --text-heading-lg-height: 60px;
+    }
 }
 
 *,
@@ -96,16 +110,24 @@ body {
     margin: 0 auto;
     padding-right: 20px;
     padding-left: 20px;
-    padding-bottom: 120px;
+    padding-bottom: 60px;
     max-width: 1200px;
 
     @media screen and (min-width: 768px) {
         padding-right: 30px;
         padding-left: 30px;
+        padding-bottom: 80px;
     }
     
     @media screen and (min-width: 1200px) {
         padding-right: 40px;
         padding-left: 40px;
+        padding-bottom: 120px;
+    }
+}
+
+.hide-on-phone {
+    @media screen and (max-width: 479px) {
+        display: none;
     }
 }

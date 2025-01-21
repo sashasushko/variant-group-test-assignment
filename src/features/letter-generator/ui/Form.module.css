@@ -24,9 +24,15 @@
 }
 
 .form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 16px;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .wide-control {

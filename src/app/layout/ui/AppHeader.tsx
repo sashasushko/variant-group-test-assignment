@@ -9,7 +9,10 @@ export const AppHeader: React.FC = () => {
   return (
     <header className={styles.container}>
       <Link className={styles.logo} to="/">
-        <img src="/logo.svg" alt="Alt+Shift Logo" width={179} height={48} />
+        <picture className={styles.logoPic}>
+          <source srcSet="/logo-lg.svg" media="(min-width: 480px)" />
+          <img src="/logo.svg" alt="Alt+Shift Logo" />
+        </picture>
       </Link>
       <Progress variant="horizontal" />
       <Link className={styles.homeIcon} to="/">

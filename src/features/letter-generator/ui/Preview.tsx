@@ -6,15 +6,17 @@ import { useCoverLetterData } from "@/entities/store";
 const placeholder = "Your personalized job application will appear here...";
 
 interface PreviewProps {
-  show: boolean;
+  showPreview: boolean;
 }
 
-export const Preview: React.FC<PreviewProps> = ({ show }) => {
+export const Preview: React.FC<PreviewProps> = ({ showPreview }) => {
   const coverLetters = useCoverLetterData();
 
   return (
     <div className={styles.container}>
-      {show && coverLetters.length > 0 ? coverLetters[0].content : placeholder}
+      {showPreview && coverLetters.length > 0
+        ? coverLetters[0].content
+        : placeholder}
     </div>
   );
 };

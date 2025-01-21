@@ -25,11 +25,24 @@
     align-items: center;
 
     .horizontal & {
+        display: none;
         gap: 4px;
+
+        @media screen and (min-width: 768px) {
+            display: flex;
+        }
     }
 
     .vertical & {
         gap: 8px;
+    }
+}
+
+.success {
+    display: none;
+
+    @media screen and (min-width: 768px) {
+        display: inline-flex;
     }
 }
 
