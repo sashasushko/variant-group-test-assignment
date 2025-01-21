@@ -55,7 +55,6 @@ export const CoverLetterProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const addCoverLetter = (content: string) => {
     const newCoverLetter: CoverLetter = {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
       id: nanoid(),
       content,
     };

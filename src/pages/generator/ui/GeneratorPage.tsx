@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "@tanstack/react-router";
-import CoverLetterGenerator from "../components/CoverLetterGenerator";
-import { useCoverLetterActions } from "../contexts/CoverLetterContext";
+import { useCoverLetterActions } from "@/entities/store";
+import { LetterGenerator } from "@/features/letter-generator";
 
-const GeneratorPage: React.FC = () => {
+export const GeneratorPage: React.FC = () => {
   const navigate = useNavigate();
   const { addCoverLetter } = useCoverLetterActions();
 
@@ -12,7 +12,5 @@ const GeneratorPage: React.FC = () => {
     void navigate({ to: "/" });
   };
 
-  return <CoverLetterGenerator onGenerate={handleGenerate} />;
+  return <LetterGenerator onGenerate={handleGenerate} />;
 };
-
-export default GeneratorPage;

@@ -1,22 +1,17 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
-import ProgressIndicator from "./ProgressIndicator";
-import Button from "./Button";
-
-import Plus from "../assets/plus.svg?react";
+import { useCoverLetterData } from "@/entities/store";
+import { GOAL_LIMIT } from "@/shared/lib/const";
+import Plus from "@/shared/assets/plus.svg?react";
+import { Button } from "@/shared/ui";
 
 import styles from "./CallToAction.module.css";
-import { useCoverLetterData } from "../contexts/CoverLetterContext";
-import { GOAL_LIMIT } from "../const";
+import { Progress } from "@/features/progress";
 
-const CallToAction: React.FC = () => {
+export const CallToAction: React.FC = () => {
   const coverLetters = useCoverLetterData();
 
-  if (coverLetters.length >= GOAL_LIMIT) {
-    return null;
-  }
-
-  return (
+  return coverLetters.length < GOAL_LIMIT ? (
     <section className={styles.container}>
       <div className={styles.panel}>
         <h2 className={styles.title}>Hit your goal</h2>
@@ -24,19 +19,13 @@ const CallToAction: React.FC = () => {
           Generate and send out couple more job applications today to get hired
           faster
         </p>
-        <Link className={styles.action} to="/generator">
+        <Link className={styles.action} to="/generate">
           <Button as="span" icon={<Plus width={24} height={24} />}>
             Create New
           </Button>
         </Link>
-        <ProgressIndicator
-          className={styles.indicator}
-          limit={GOAL_LIMIT}
-          variant="vertical"
-        />
+        <Progress className={styles.indicator} variant="vertical" />
       </div>
     </section>
-  );
+  ) : null;
 };
-
-export default CallToAction;

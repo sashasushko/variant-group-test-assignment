@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-interface CoverLetterGeneratorProps {
+interface LetterGeneratorProps {
   onGenerate: (content: string) => void;
 }
 
-const CoverLetterGenerator: React.FC<CoverLetterGeneratorProps> = ({
+export const LetterGenerator: React.FC<LetterGeneratorProps> = ({
   onGenerate,
 }) => {
   const [formData, setFormData] = useState({
@@ -87,5 +87,3 @@ Sincerely,
     </form>
   );
 };
-
-export default CoverLetterGenerator;

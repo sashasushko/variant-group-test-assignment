@@ -1,8 +1,8 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
-import AppHeader from "../components/AppHeader";
-import CallToAction from "../components/CallToAction";
+import { AppHeader } from "@/app/layout";
+import { CallToAction } from "@/widgets/call-to-action";
 
 export const Route = createRootRoute({
   component: () => (

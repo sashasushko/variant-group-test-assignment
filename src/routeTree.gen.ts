@@ -17,15 +17,15 @@ import { Route as IndexImport } from './routes/index'
 
 // Create Virtual Routes
 
-const GeneratorLazyImport = createFileRoute('/generator')()
+const GenerateLazyImport = createFileRoute('/generate')()
 
 // Create/Update Routes
 
-const GeneratorLazyRoute = GeneratorLazyImport.update({
-  id: '/generator',
-  path: '/generator',
+const GenerateLazyRoute = GenerateLazyImport.update({
+  id: '/generate',
+  path: '/generate',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/generator.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/generate.lazy').then((d) => d.Route))
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -44,11 +44,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/generator': {
-      id: '/generator'
-      path: '/generator'
-      fullPath: '/generator'
-      preLoaderRoute: typeof GeneratorLazyImport
+    '/generate': {
+      id: '/generate'
+      path: '/generate'
+      fullPath: '/generate'
+      preLoaderRoute: typeof GenerateLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -58,37 +58,37 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/generator': typeof GeneratorLazyRoute
+  '/generate': typeof GenerateLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/generator': typeof GeneratorLazyRoute
+  '/generate': typeof GenerateLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/generator': typeof GeneratorLazyRoute
+  '/generate': typeof GenerateLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/generator'
+  fullPaths: '/' | '/generate'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/generator'
-  id: '__root__' | '/' | '/generator'
+  to: '/' | '/generate'
+  id: '__root__' | '/' | '/generate'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  GeneratorLazyRoute: typeof GeneratorLazyRoute
+  GenerateLazyRoute: typeof GenerateLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  GeneratorLazyRoute: GeneratorLazyRoute,
+  GenerateLazyRoute: GenerateLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -102,14 +102,14 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/generator"
+        "/generate"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/generator": {
-      "filePath": "generator.lazy.tsx"
+    "/generate": {
+      "filePath": "generate.lazy.tsx"
     }
   }
 }

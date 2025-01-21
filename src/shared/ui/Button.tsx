@@ -8,19 +8,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   as: Component = "button",
   icon = null,
   size = "md",
-  children,
+  children = null,
   ...props
 }) => {
   return (
     <Component className={clsx(styles.element, styles[size])} {...props}>
       {icon && <span className={styles.icon}>{icon}</span>}
-      <span>{children}</span>
+      {children && <span>{children}</span>}
     </Component>
   );
 };
-
-export default Button;
