@@ -1,14 +1,15 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Button, Input } from "@/shared/ui";
+import { type GeneratorStatus } from "@/shared/model";
 import { type FormData } from "../model/types";
 import { combineTitle } from "../lib/combineTitle";
 
 import styles from "./Form.module.css";
-import { generateContent } from "../lib/generateContent";
 
 interface FormProps {
-  onGenerate: (content: string) => void;
+  status?: GeneratorStatus;
+  onGenerate: (formData: FormData) => void;
 }
 
 const initialData: FormData = {
@@ -18,10 +19,8 @@ const initialData: FormData = {
   additionalDetails: "",
 };
 
-export const Form: React.FC<FormProps> = ({ onGenerate }) => {
+export const Form = memo(({ status = "initial", onGenerate }: FormProps) => {
   const [formData, setFormData] = useState<FormData>(initialData);
-
-  const geneartedOnceRef = useRef(false);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -33,12 +32,7 @@ export const Form: React.FC<FormProps> = ({ onGenerate }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!geneartedOnceRef.current) {
-      geneartedOnceRef.current = true;
-    }
-
-    onGenerate(generateContent(formData));
+    onGenerate(formData);
   };
 
   const hasEmptyFields = useMemo(() => {
@@ -104,13 +98,26 @@ export const Form: React.FC<FormProps> = ({ onGenerate }) => {
         <Button
           className={styles.wideControl}
           type="submit"
-          variant={geneartedOnceRef.current ? "outline" : "default"}
-          icon={geneartedOnceRef.current ? "repeat" : void 0}
+          variant={status === "repeated" ? "outline" : "default"}
+          icon={
+            status === "repeated"
+              ? "repeat"
+              : status === "pending"
+                ? "loading"
+                : void 0
+          }
           disabled={hasEmptyFields}
+          pending={status === "pending"}
         >
-          {geneartedOnceRef.current ? "Try Again" : "Generate Now"}
+          {status === "repeated"
+            ? "Try Again"
+            : status === "initial"
+              ? "Generate Now"
+              : void 0}
         </Button>
       </form>
     </div>
   );
-};
+});
+
+Form.displayName = "Form";

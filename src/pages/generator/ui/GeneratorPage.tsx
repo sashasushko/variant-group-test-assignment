@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import { useCoverLetterActions } from "@/entities/store";
-import { Form, Preview } from "@/features/letter-generator";
+import { Form, Preview, type FormData } from "@/features/letter-generator";
 
 import styles from "./GeneratorPage.module.css";
+import { GeneratorStatus } from "@/shared/model";
 
 export const GeneratorPage: React.FC = () => {
-  const [isPreview, setIsPreview] = useState(false);
+  const [status, setStatus] = useState<GeneratorStatus>("pending");
 
   const { addCoverLetter } = useCoverLetterActions();
 
-  const handleGenerate = (content: string) => {
-    addCoverLetter(content);
-    setIsPreview(true);
+  const handleGenerate = (formData: FormData) => {
+    addCoverLetter("content");
+    setStatus("pending");
   };
 
   return (
     <div className={styles.container}>
-      <Form onGenerate={handleGenerate} />
-      <Preview showPreview={isPreview} />
+      <Form status={status} onGenerate={handleGenerate} />
+      <Preview status={status} />
     </div>
   );
 };

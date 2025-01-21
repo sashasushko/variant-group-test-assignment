@@ -12,6 +12,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "sm" | "md";
   variant?: "default" | "outline";
   icon?: "plus" | "repeat" | "loading";
+  pending?: boolean;
 }
 
 const iconSizeMap = {
@@ -40,6 +41,7 @@ export const Button = memo(
     size = "md",
     variant = "default",
     children = null,
+    pending = false,
     ...props
   }: ButtonProps) => {
     return (
@@ -48,12 +50,15 @@ export const Button = memo(
           styles.element,
           styles[size],
           styles[variant],
+          pending && styles.pending,
           className,
         )}
         {...props}
       >
         {icon && (
-          <span className={styles.icon}>
+          <span
+            className={clsx(styles.icon, icon === "loading" && styles.spin)}
+          >
             {getIconByKey(icon, iconSizeMap[size])}
           </span>
         )}
