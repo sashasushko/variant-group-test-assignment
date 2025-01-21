@@ -1,6 +1,10 @@
 import { memo, useCallback } from "react";
 import { CoverLetter, useCoverLetterActions } from "@/entities/store";
 import { copyToClipboard } from "@/shared/lib";
+import Trash from "@/shared/assets/trash.svg?react";
+import Copy from "@/shared/assets/copy.svg?react";
+
+import styles from "./LetterListItem.module.css";
 
 export const LetterListItem = memo(({ letter }: { letter: CoverLetter }) => {
   const { deleteCoverLetter } = useCoverLetterActions();
@@ -14,19 +18,18 @@ export const LetterListItem = memo(({ letter }: { letter: CoverLetter }) => {
   }, [deleteCoverLetter, letter.id]);
 
   return (
-    <article>
-      <header>
-        <h3>Cover Letter</h3>
-      </header>
-      <div>
-        <p>{letter.content}</p>
-      </div>
-      <footer>
-        <button type="button" onClick={handleCopy}>
-          Copy to Clipboard
+    <article className={styles.element}>
+      <p className={styles.content}>
+        {letter.content.replace(/(\r?\n){2,}/g, "\n")}
+      </p>
+      <footer className={styles.footer}>
+        <button className={styles.control} type="button" onClick={handleDelete}>
+          <Trash width={20} height={20} />
+          <span>Delete</span>
         </button>
-        <button type="button" onClick={handleDelete}>
-          Delete
+        <button className={styles.control} type="button" onClick={handleCopy}>
+          <span>Copy to Clipboard</span>
+          <Copy width={20} height={20} />
         </button>
       </footer>
     </article>

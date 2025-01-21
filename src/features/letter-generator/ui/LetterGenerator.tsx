@@ -23,16 +23,17 @@ export const LetterGenerator: React.FC<LetterGeneratorProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const content = `Dear Hiring Manager,
+    const content = `Dear ${formData.company} Team,
 
-I am writing to express my strong interest in the ${formData.jobTitle} position at ${formData.company}. With my skills in ${formData.skills}, I believe I would be a valuable addition to your team.
+I am writing to express my interest in the ${formData.jobTitle} position.
+
+My experience in the realm combined with my skills in ${formData.skills} make me a strong candidate for this role.
 
 ${formData.additionalDetails}
 
-Thank you for your consideration. I look forward to the opportunity to discuss how I can contribute to ${formData.company}'s success.
+I am confident that my skills and enthusiasm would translate into valuable contributions to your esteemed organization.
 
-Sincerely,
-[Your Name]`;
+Thank you for considering my application. I eagerly await the opportunity to discuss my qualifications further.`;
     onGenerate(content);
   };
 
