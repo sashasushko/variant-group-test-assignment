@@ -1,6 +1,6 @@
 import React from "react";
 import { useCoverLetterData } from "@/entities/store";
-import { ProgressIndicator, type Variant } from "@/shared/ui";
+import { Indicator, type Variant } from "@/shared/ui";
 import { GOAL_LIMIT } from "@/shared/lib/const";
 
 interface ProgressProps {
@@ -12,7 +12,7 @@ export const Progress: React.FC<ProgressProps> = ({ className, variant }) => {
   const coverLetters = useCoverLetterData();
 
   return (
-    <ProgressIndicator
+    <Indicator
       className={className}
       current={coverLetters.length}
       limit={GOAL_LIMIT}
