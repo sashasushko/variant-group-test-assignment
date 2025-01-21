@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import { Button, Input } from "@/shared/ui";
-import Repeat from "@/shared/assets/repeat.svg?react";
 import { type FormData } from "../model/types";
 import { combineTitle } from "../lib/combineTitle";
 
@@ -106,7 +105,7 @@ export const Form: React.FC<FormProps> = ({ onGenerate }) => {
           className={styles.wideControl}
           type="submit"
           variant={geneartedOnceRef.current ? "outline" : "default"}
-          icon={geneartedOnceRef.current && <Repeat width={24} height={24} />}
+          icon={geneartedOnceRef.current ? "repeat" : void 0}
           disabled={hasEmptyFields}
         >
           {geneartedOnceRef.current ? "Try Again" : "Generate Now"}
