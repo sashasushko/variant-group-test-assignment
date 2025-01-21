@@ -23,8 +23,7 @@ export const LetterGenerator: React.FC<LetterGeneratorProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const content = `
-Dear Hiring Manager,
+    const content = `Dear Hiring Manager,
 
 I am writing to express my strong interest in the ${formData.jobTitle} position at ${formData.company}. With my skills in ${formData.skills}, I believe I would be a valuable addition to your team.
 
@@ -33,8 +32,7 @@ ${formData.additionalDetails}
 Thank you for your consideration. I look forward to the opportunity to discuss how I can contribute to ${formData.company}'s success.
 
 Sincerely,
-[Your Name]
-    `;
+[Your Name]`;
     onGenerate(content);
   };
 
