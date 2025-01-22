@@ -33,22 +33,24 @@ Additional details about me: ${formData.additionalDetails}`,
         },
       ];
 
-  const response = await fetch(
-    import.meta.env.VITE_OPEN_AI_ENDPOINT as string,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_OPEN_AI_API_KEY as string}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: messages,
-        max_tokens: 500,
-        temperature: 0.7,
-      }),
-    },
-  );
+  const response = await fetch(import.meta.env.VITE_API_ENDPOINT as string, {
+    method: "POST",
+    headers:
+      import.meta.env.MODE === "development"
+        ? {
+            Authorization: `Bearer ${import.meta.env.VITE_API_KEY as string}`,
+            "Content-Type": "application/json",
+          }
+        : {
+            "Content-Type": "application/json",
+          },
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: messages,
+      max_tokens: 500,
+      temperature: 0.7,
+    }),
+  });
 
   if (!response.ok) {
     throw new Error("Failed to generate cover letter with ChatGPT");
