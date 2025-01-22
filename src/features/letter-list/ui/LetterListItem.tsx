@@ -28,7 +28,7 @@ export const LetterListItem = memo(({ letter }: { letter: CoverLetter }) => {
           <span>Delete</span>
         </button>
         <button className={styles.control} type="button" onClick={handleCopy}>
-          <span>Copy to Clipboard</span>
+          <span>Copy to clipboard</span>
           <Copy width={20} height={20} />
         </button>
       </footer>

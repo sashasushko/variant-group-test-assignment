@@ -45,6 +45,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    padding: 0;
     border: none;
     border-radius: 2px;
     background-color: transparent;
