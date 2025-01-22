@@ -3,10 +3,19 @@ import {
   Outlet,
   ScrollRestoration,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 import { AppHeader } from "@/app/layout";
 import { CallToAction } from "@/widgets/call-to-action";
+import React, { Suspense } from "react";
+
+const TanStackRouterDevtools =
+  process.env.NODE_ENV === "production"
+    ? () => null
+    : React.lazy(() =>
+        import("@tanstack/router-devtools").then((res) => ({
+          default: res.TanStackRouterDevtools,
+        })),
+      );
 
 export const Route = createRootRoute({
   component: () => (
@@ -15,7 +24,9 @@ export const Route = createRootRoute({
       <Outlet />
       <CallToAction />
       <ScrollRestoration />
-      <TanStackRouterDevtools />
+      <Suspense>
+        <TanStackRouterDevtools />
+      </Suspense>
     </div>
   ),
 });
