@@ -1,6 +1,8 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import clsx from "clsx";
 import { useCoverLetterData } from "@/entities/store";
+import { copyToClipboard } from "@/shared/lib";
+import Copy from "@/shared/assets/copy.svg?react";
 
 import styles from "./Preview.module.css";
 
@@ -16,6 +18,12 @@ export const Preview = memo(
   ({ loading, isFirstRequest, error }: PreviewProps) => {
     const coverLetters = useCoverLetterData();
 
+    const lastGeneratedLetter = coverLetters[0];
+
+    const handleCopy = useCallback(() => {
+      void copyToClipboard(lastGeneratedLetter?.content);
+    }, [lastGeneratedLetter?.content]);
+
     return (
       <div className={styles.container}>
         <div className={clsx(styles.element, loading && styles.pending)}>
@@ -24,7 +32,17 @@ export const Preview = memo(
           ) : isFirstRequest || coverLetters.length === 0 ? (
             placeholder
           ) : (
-            coverLetters[0].content
+            <>
+              <div>{lastGeneratedLetter?.content}</div>
+              <button
+                className={styles.control}
+                type="button"
+                onClick={handleCopy}
+              >
+                <span>Copy to clipboard</span>
+                <Copy width={20} height={20} />
+              </button>
+            </>
           )}
         </div>
         {error && <p className={styles.error}>{error}</p>}
