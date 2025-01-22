@@ -11,6 +11,7 @@
     transition-timing-function: ease-in-out;
     outline: none;
     cursor: pointer;
+    text-decoration: none;
 
     &.pending {
         pointer-events: none;
