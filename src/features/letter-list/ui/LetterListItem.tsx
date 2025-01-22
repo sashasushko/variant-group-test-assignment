@@ -10,7 +10,7 @@ export const LetterListItem = memo(({ letter }: { letter: CoverLetter }) => {
   const { deleteCoverLetter } = useCoverLetterActions();
 
   const handleCopy = useCallback(() => {
-    copyToClipboard(letter.content);
+    void copyToClipboard(letter.content);
   }, [letter.content]);
 
   const handleDelete = useCallback(() => {
