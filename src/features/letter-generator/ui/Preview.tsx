@@ -1,32 +1,36 @@
 import { memo } from "react";
 import clsx from "clsx";
 import { useCoverLetterData } from "@/entities/store";
-import { GeneratorStatus } from "@/shared/model";
 
 import styles from "./Preview.module.css";
 
 const placeholder = "Your personalized job application will appear here...";
 
 interface PreviewProps {
-  status?: GeneratorStatus;
+  loading: boolean;
+  isFirstRequest: boolean;
+  error: string | null;
 }
 
-export const Preview = memo(({ status = "initial" }: PreviewProps) => {
-  const coverLetters = useCoverLetterData();
+export const Preview = memo(
+  ({ loading, isFirstRequest, error }: PreviewProps) => {
+    const coverLetters = useCoverLetterData();
 
-  return (
-    <div
-      className={clsx(styles.container, status === "pending" && styles.pending)}
-    >
-      {status === "repeated" && coverLetters.length > 0 ? (
-        coverLetters[0].content
-      ) : status === "pending" ? (
-        <span className={styles.ball} />
-      ) : (
-        placeholder
-      )}
-    </div>
-  );
-});
+    return (
+      <div className={styles.container}>
+        <div className={clsx(styles.element, loading && styles.pending)}>
+          {loading ? (
+            <span className={styles.ball} />
+          ) : isFirstRequest || coverLetters.length === 0 ? (
+            placeholder
+          ) : (
+            coverLetters[0].content
+          )}
+        </div>
+        {error && <p className={styles.error}>{error}</p>}
+      </div>
+    );
+  },
+);
 
 Preview.displayName = "Preview";

@@ -1,15 +1,15 @@
 import React, { memo, useCallback, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Button, Input } from "@/shared/ui";
-import { type GeneratorStatus } from "@/shared/model";
 import { type FormData } from "../model/types";
 import { combineTitle } from "../lib/combineTitle";
 
 import styles from "./Form.module.css";
 
 interface FormProps {
-  status?: GeneratorStatus;
-  onGenerate: (formData: FormData) => void;
+  loading: boolean;
+  isFirstRequest: boolean;
+  onSubmit: (formData: FormData) => void;
 }
 
 const initialData: FormData = {
@@ -19,7 +19,7 @@ const initialData: FormData = {
   additionalDetails: "",
 };
 
-export const Form = memo(({ status = "initial", onGenerate }: FormProps) => {
+export const Form = memo(({ loading, isFirstRequest, onSubmit }: FormProps) => {
   const [formData, setFormData] = useState<FormData>(initialData);
 
   const handleChange = useCallback(
@@ -32,7 +32,7 @@ export const Form = memo(({ status = "initial", onGenerate }: FormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onGenerate(formData);
+    onSubmit(formData);
   };
 
   const hasEmptyFields = useMemo(() => {
@@ -98,22 +98,12 @@ export const Form = memo(({ status = "initial", onGenerate }: FormProps) => {
         <Button
           className={styles.wideControl}
           type="submit"
-          variant={status === "repeated" ? "outline" : "default"}
-          icon={
-            status === "repeated"
-              ? "repeat"
-              : status === "pending"
-                ? "loading"
-                : void 0
-          }
+          variant={isFirstRequest ? "default" : "outline"}
+          icon={loading ? "loading" : isFirstRequest ? void 0 : "repeat"}
           disabled={hasEmptyFields}
-          pending={status === "pending"}
+          pending={loading}
         >
-          {status === "repeated"
-            ? "Try Again"
-            : status === "initial"
-              ? "Generate Now"
-              : void 0}
+          {loading ? null : isFirstRequest ? "Generate Now" : "Try Again"}
         </Button>
       </form>
     </div>

@@ -1,24 +1,41 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useCoverLetterActions } from "@/entities/store";
 import { Form, Preview, type FormData } from "@/features/letter-generator";
+import { useCoverLetterGenerator } from "../hooks/useCoverLetterGenerator";
 
 import styles from "./GeneratorPage.module.css";
-import { GeneratorStatus } from "@/shared/model";
 
 export const GeneratorPage: React.FC = () => {
-  const [status, setStatus] = useState<GeneratorStatus>("pending");
-
   const { addCoverLetter } = useCoverLetterActions();
 
-  const handleGenerate = (formData: FormData) => {
-    addCoverLetter("content");
-    setStatus("pending");
-  };
+  const { generateLetter, generatedLetter, loading, error, isFirstRequest } =
+    useCoverLetterGenerator();
+
+  useEffect(() => {
+    if (generatedLetter !== null) {
+      addCoverLetter(generatedLetter);
+    }
+  }, [addCoverLetter, generatedLetter]);
+
+  const handleSubmit = useCallback(
+    (formData: FormData) => {
+      void generateLetter(formData);
+    },
+    [generateLetter],
+  );
 
   return (
     <div className={styles.container}>
-      <Form status={status} onGenerate={handleGenerate} />
-      <Preview status={status} />
+      <Form
+        loading={loading}
+        isFirstRequest={isFirstRequest}
+        onSubmit={handleSubmit}
+      />
+      <Preview
+        loading={loading}
+        isFirstRequest={isFirstRequest}
+        error={error}
+      />
     </div>
   );
 };
