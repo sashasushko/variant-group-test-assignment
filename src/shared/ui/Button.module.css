@@ -11,6 +11,7 @@
     transition-timing-function: ease-in-out;
     outline: none;
     cursor: pointer;
+    text-decoration: none;
 
     &.pending {
         pointer-events: none;
@@ -58,10 +59,12 @@
         padding: 5px 11px;
         font-size: var(--text);
         line-height: var(--text-height);
+        min-height: 36px;
 
         @media screen and (min-width: 640px) {
             gap: 8px;
             padding: 9px 17px;
+            min-height: 44px;
         }
     }
 
@@ -70,6 +73,7 @@
         padding: 11px 23px;
         font-size: var(--text-lg);
         line-height: var(--text-lg-height);
+        min-height: 52px;
 
         @media screen and (min-width: 640px) {
             gap: 12px;

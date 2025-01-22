@@ -5,6 +5,7 @@
     src: url('/FixelDisplay-SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -12,6 +13,7 @@
     src: url('/FixelText-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -19,6 +21,7 @@
     src: url('/FixelText-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -26,6 +29,7 @@
     src: url('/FixelText-SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
 }
 
 :root {
@@ -44,8 +48,8 @@
     --color-neutral-5: #475467;
     --color-neutral-6: #344054;
 
-    --font-family-heading: 'Fixel Display', sans-serif;
-    --font-family: 'Fixel Text', sans-serif;
+    --font-family-heading: 'Fixel Display', 'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif;
+    --font-family: 'Fixel Text', 'Helvetica Neue', 'Arial', 'Roboto', sans-serif;
 
     --text-heading: 28px;
     --text-heading-height: 34px;
