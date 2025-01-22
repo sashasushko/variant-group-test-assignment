@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "@tanstack/react-router";
 import { useCoverLetterData } from "@/entities/store";
 import { GOAL_LIMIT } from "@/shared/lib/const";
-import Plus from "@/shared/assets/plus.svg?react";
 import { Button } from "@/shared/ui";
 
 import styles from "./CallToAction.module.css";
@@ -20,7 +19,7 @@ export const CallToAction: React.FC = () => {
           faster
         </p>
         <Link className={styles.action} to="/generate">
-          <Button as="span" icon={<Plus width={24} height={24} />}>
+          <Button as="span" icon="plus">
             Create New
           </Button>
         </Link>

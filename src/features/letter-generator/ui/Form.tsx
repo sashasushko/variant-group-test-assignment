@@ -1,15 +1,15 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Button, Input } from "@/shared/ui";
-import Repeat from "@/shared/assets/repeat.svg?react";
 import { type FormData } from "../model/types";
 import { combineTitle } from "../lib/combineTitle";
 
 import styles from "./Form.module.css";
-import { generateContent } from "../lib/generateContent";
 
 interface FormProps {
-  onGenerate: (content: string) => void;
+  loading: boolean;
+  isFirstRequest: boolean;
+  onSubmit: (formData: FormData) => void;
 }
 
 const initialData: FormData = {
@@ -19,10 +19,8 @@ const initialData: FormData = {
   additionalDetails: "",
 };
 
-export const Form: React.FC<FormProps> = ({ onGenerate }) => {
+export const Form = memo(({ loading, isFirstRequest, onSubmit }: FormProps) => {
   const [formData, setFormData] = useState<FormData>(initialData);
-
-  const geneartedOnceRef = useRef(false);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -34,12 +32,7 @@ export const Form: React.FC<FormProps> = ({ onGenerate }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!geneartedOnceRef.current) {
-      geneartedOnceRef.current = true;
-    }
-
-    onGenerate(generateContent(formData));
+    onSubmit(formData);
   };
 
   const hasEmptyFields = useMemo(() => {
@@ -105,13 +98,16 @@ export const Form: React.FC<FormProps> = ({ onGenerate }) => {
         <Button
           className={styles.wideControl}
           type="submit"
-          variant={geneartedOnceRef.current ? "outline" : "default"}
-          icon={geneartedOnceRef.current && <Repeat width={24} height={24} />}
+          variant={isFirstRequest ? "default" : "outline"}
+          icon={loading ? "loading" : isFirstRequest ? void 0 : "repeat"}
           disabled={hasEmptyFields}
+          pending={loading}
         >
-          {geneartedOnceRef.current ? "Try Again" : "Generate Now"}
+          {loading ? null : isFirstRequest ? "Generate Now" : "Try Again"}
         </Button>
       </form>
     </div>
   );
-};
+});
+
+Form.displayName = "Form";

@@ -36,7 +36,8 @@ export const Indicator = ({
       return (
         <div className={clsx(styles.element, styles.horizontal, className)}>
           <span className={styles.labelLong}>
-            {current}/{goal} <span className="hide-on-phone">applications </span>
+            {current}/{goal}{" "}
+            <span className="hide-on-phone">applications </span>
             generated
           </span>
           {current >= goal ? (

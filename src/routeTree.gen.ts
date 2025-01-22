@@ -8,24 +8,19 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as GenerateImport } from './routes/generate'
 import { Route as IndexImport } from './routes/index'
-
-// Create Virtual Routes
-
-const GenerateLazyImport = createFileRoute('/generate')()
 
 // Create/Update Routes
 
-const GenerateLazyRoute = GenerateLazyImport.update({
+const GenerateRoute = GenerateImport.update({
   id: '/generate',
   path: '/generate',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/generate.lazy').then((d) => d.Route))
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -48,7 +43,7 @@ declare module '@tanstack/react-router' {
       id: '/generate'
       path: '/generate'
       fullPath: '/generate'
-      preLoaderRoute: typeof GenerateLazyImport
+      preLoaderRoute: typeof GenerateImport
       parentRoute: typeof rootRoute
     }
   }
@@ -58,18 +53,18 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/generate': typeof GenerateLazyRoute
+  '/generate': typeof GenerateRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/generate': typeof GenerateLazyRoute
+  '/generate': typeof GenerateRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/generate': typeof GenerateLazyRoute
+  '/generate': typeof GenerateRoute
 }
 
 export interface FileRouteTypes {
@@ -83,12 +78,12 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  GenerateLazyRoute: typeof GenerateLazyRoute
+  GenerateRoute: typeof GenerateRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  GenerateLazyRoute: GenerateLazyRoute,
+  GenerateRoute: GenerateRoute,
 }
 
 export const routeTree = rootRoute
@@ -109,7 +104,7 @@ export const routeTree = rootRoute
       "filePath": "index.tsx"
     },
     "/generate": {
-      "filePath": "generate.lazy.tsx"
+      "filePath": "generate.tsx"
     }
   }
 }
