@@ -51,7 +51,8 @@ export const Form = memo(({ loading, isFirstRequest, onSubmit }: FormProps) => {
         <h2
           className={clsx(
             styles.title,
-            (formData.jobTitle || formData.company) && styles.active,
+            (formData.jobTitle.trim() || formData.company.trim()) &&
+              styles.active,
           )}
         >
           {title}
