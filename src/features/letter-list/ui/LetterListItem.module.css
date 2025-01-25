@@ -53,7 +53,7 @@
     font-weight: 600;
     font-family: var(--font-family);
     font-size: var(--text);
-    line-height: var(--text--height);
+    line-height: var(--text-height);
     cursor: pointer;
     box-shadow: 0 0 0 4px transparent;
     transition-property: background-color, box-shadow;
