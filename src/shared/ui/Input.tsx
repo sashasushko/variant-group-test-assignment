@@ -59,7 +59,10 @@ export const Input = memo(
           {label}
         </label>
         <Component
-          className={styles.element}
+          className={clsx(
+            styles.element,
+            Component === "textarea" && styles.textarea,
+          )}
           id={id}
           name={id}
           value={value}
