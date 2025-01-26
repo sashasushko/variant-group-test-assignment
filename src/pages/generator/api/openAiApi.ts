@@ -1,8 +1,8 @@
-import { FormData } from "@/features/letter-generator";
+import { GeneratorFormData } from "@/features/letter-generator";
 import { OpenAiApiResponse } from "../model/types";
 
 export const generateCoverLetterWithChatGpt = async (
-  formData: FormData,
+  formData: GeneratorFormData,
   previousLetter: string | null,
 ): Promise<string> => {
   const messages = previousLetter

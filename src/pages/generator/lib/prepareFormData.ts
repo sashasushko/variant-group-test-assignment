@@ -1,4 +1,4 @@
-import { FormData } from "@/features/letter-generator";
+import { GeneratorFormData } from "@/features/letter-generator";
 import DOMPurify from "dompurify";
 
 const cleanData = (input: string) => {
@@ -7,7 +7,9 @@ const cleanData = (input: string) => {
   return DOMPurify.sanitize(cleanedInput);
 };
 
-export const prepareFormData = (formData: FormData): FormData => {
+export const prepareFormData = (
+  formData: GeneratorFormData,
+): GeneratorFormData => {
   return {
     jobTitle: cleanData(formData.jobTitle),
     company: cleanData(formData.company),

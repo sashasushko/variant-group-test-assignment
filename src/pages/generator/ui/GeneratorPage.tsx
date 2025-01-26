@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect } from "react";
 import { useCoverLetterActions } from "@/entities/store";
-import { Form, Preview, type FormData } from "@/features/letter-generator";
+import {
+  Form,
+  Preview,
+  type GeneratorFormData,
+} from "@/features/letter-generator";
 import { useCoverLetterGenerator } from "../hooks/useCoverLetterGenerator";
 
 import styles from "./GeneratorPage.module.css";
@@ -18,7 +22,7 @@ export const GeneratorPage: React.FC = () => {
   }, [addCoverLetter, generatedLetter]);
 
   const handleSubmit = useCallback(
-    (formData: FormData) => {
+    (formData: GeneratorFormData) => {
       void generateLetter(formData);
     },
     [generateLetter],

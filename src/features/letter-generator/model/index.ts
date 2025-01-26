@@ -1,1 +1,1 @@
-export { type FormData } from "./types";
+export { type GeneratorFormData } from "./types";

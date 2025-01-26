@@ -1,6 +1,6 @@
-import { FormData } from "@/features/letter-generator";
+import { GeneratorFormData } from "@/features/letter-generator";
 
-export const generateStaticContent = (formData: FormData): string => {
+export const generateStaticContent = (formData: GeneratorFormData): string => {
   return `Dear ${formData.company} Team,
 
 I am writing to express my interest in the ${formData.jobTitle} position.

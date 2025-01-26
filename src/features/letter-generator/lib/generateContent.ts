@@ -1,6 +1,6 @@
-import { type FormData } from "../model/types";
+import { type GeneratorFormData } from "../model/types";
 
-export function generateContent(formData: FormData): string {
+export function generateContent(formData: GeneratorFormData): string {
   const { jobTitle, company, skills, additionalDetails } = formData;
 
   return `Dear ${company.trim()} Team,
