@@ -70,26 +70,4 @@
 
 .control {
     align-self: flex-end;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0;
-    border: none;
-    border-radius: 2px;
-    background-color: transparent;
-    color: var(--color-neutral-5);
-    font-weight: 600;
-    font-family: var(--font-family);
-    font-size: var(--text);
-    line-height: var(--text-height);
-    cursor: pointer;
-    box-shadow: 0 0 0 4px transparent;
-    transition-property: background-color, box-shadow;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
-
-    &:hover {
-        background-color: var(--color-neutral-1);
-        box-shadow: 0 0 0 4px var(--color-neutral-1);
-    }
 }

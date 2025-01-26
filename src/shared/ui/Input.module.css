@@ -36,6 +36,10 @@
         border-color: #73E2A3;
         box-shadow: 0 1px 2px rgb(16, 24, 40, 0.05), 0 0 0 4px #D3F8DF;
     }
+
+    &.textarea {
+        max-width: 100%;
+    }
 }
 
 .info {

@@ -1,17 +1,12 @@
 import { memo, useCallback } from "react";
 import { CoverLetter, useCoverLetterActions } from "@/entities/store";
-import { copyToClipboard } from "@/shared/lib";
 import Trash from "@/shared/assets/trash.svg?react";
-import Copy from "@/shared/assets/copy.svg?react";
+import { CopyToClipboardButton } from "@/shared/ui";
 
 import styles from "./LetterListItem.module.css";
 
 export const LetterListItem = memo(({ letter }: { letter: CoverLetter }) => {
   const { deleteCoverLetter } = useCoverLetterActions();
-
-  const handleCopy = useCallback(() => {
-    void copyToClipboard(letter.content);
-  }, [letter.content]);
 
   const handleDelete = useCallback(() => {
     deleteCoverLetter(letter.id);
@@ -27,10 +22,7 @@ export const LetterListItem = memo(({ letter }: { letter: CoverLetter }) => {
           <Trash width={20} height={20} />
           <span>Delete</span>
         </button>
-        <button className={styles.control} type="button" onClick={handleCopy}>
-          <span>Copy to clipboard</span>
-          <Copy width={20} height={20} />
-        </button>
+        <CopyToClipboardButton textToCopy={letter.content} />
       </footer>
     </article>
   );

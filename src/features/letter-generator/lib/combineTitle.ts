@@ -1,6 +1,6 @@
-import { FormData } from "../model/types";
+import { GeneratorFormData } from "../model/types";
 
-export function combineTitle(formData: FormData) {
+export function combineTitle(formData: GeneratorFormData) {
   if (formData.jobTitle.trim() && formData.company.trim()) {
     return `${formData.jobTitle}, ${formData.company}`;
   }

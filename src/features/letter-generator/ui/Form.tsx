@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useMemo, useState } from "react";
 import clsx from "clsx";
 import { Button, Input } from "@/shared/ui";
-import { type FormData } from "../model/types";
+import { type GeneratorFormData } from "../model/types";
 import { combineTitle } from "../lib/combineTitle";
 
 import styles from "./Form.module.css";
@@ -9,10 +9,10 @@ import styles from "./Form.module.css";
 interface FormProps {
   loading: boolean;
   isFirstRequest: boolean;
-  onSubmit: (formData: FormData) => void;
+  onSubmit: (formData: GeneratorFormData) => void;
 }
 
-const initialData: FormData = {
+const initialData: GeneratorFormData = {
   jobTitle: "",
   company: "",
   skills: "",
@@ -20,7 +20,7 @@ const initialData: FormData = {
 };
 
 export const Form = memo(({ loading, isFirstRequest, onSubmit }: FormProps) => {
-  const [formData, setFormData] = useState<FormData>(initialData);
+  const [formData, setFormData] = useState<GeneratorFormData>(initialData);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

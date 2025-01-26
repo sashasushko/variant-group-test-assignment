@@ -17,6 +17,7 @@
     font-size: var(--text-heading);
     line-height: var(--text-heading-height);
     letter-spacing: -2%;
+    word-break: break-word;
 
     &.active {
         color: var(--color-black);
